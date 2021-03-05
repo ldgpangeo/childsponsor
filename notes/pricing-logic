@@ -1,0 +1,51 @@
+Pricing logic for multiple sponsorships of the same child.
+
+a.  the max_sponsors field in the groups table controls the number of sponsors permitted per child.
+		1	only one sponsor per child
+		n	up to n sponsors are possible
+		I would discourage values of n greater than 2, but there's no mathematical reason
+		to limit it within the computer logic.
+
+b.  The num_sponsors column in the items table records the number of active sponsors for that child.
+		This increments by 1 whenever a sponsor is added
+		This decrements by 1 whenever a sponsor is removed
+		It can never be less than 0
+		
+c.  A child is fully sponsored when num_sponsors >= max_sponsors.
+
+d.  A child is available for sponsorship when num_sponsors < max_sponsors.
+
+e.  When more than one sponsor per child is possible, the options are:
+		Sponsor the entire child.
+		Sponsor 1/n of the child.
+		
+		We will not permit arbitrary splits since this will become too difficult to track efficiently.
+		
+f.  When renewing an existing sponsorship, the sponsor can NOT change their sponsorship level.  
+		Someone fully sponsoring the child can not switch to shared sponsorship.
+		Someone in a shared sponsorship can not switch to a full sponsorship.
+		
+		The alternative is to release the child and create a new sponsorship with the new settings.
+		
+g.  When a child is partially sponsored, that sponsor can increase to a full sponsorship by 
+	purchasing the other portions of that child (if they are still available), but the system 
+	will treat each of those portions as separate shared sponsorships that just happen to involve 
+	the same person.  Each will be a separate transaction with different payment dates.
+		It is just not feasible to consolidate multiple recurring credit card transactions
+		into a single transaction with a new dollar amount.
+		
+		The alternative is to release the child and create a new sponsorship with the new settings. 
+		
+h.  Rules for moving a child from one group to another.  
+
+	This matters only when max_sponsors is different for the two groups.  
+	
+	When max_sponsors for the new group is greater than for the prior group:
+		There needs to be discussion of what to do with existing sponsorships.
+			When a child has a single sponsor, does that person automatically assume the additional sponsorship(s)?
+	
+	When max_sponsors for the new group is less than for the prior group:
+			
+		
+
+	

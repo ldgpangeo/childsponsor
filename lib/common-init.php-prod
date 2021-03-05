@@ -1,0 +1,8 @@
+<?php 
+
+$mode = "prod";
+$path = "/usr/www/virtual/giving/www.thegivingcircle.org/childsponsor";
+$cms = "wordpress";
+
+include_once "$path/lib/common-settings.php";
+?>

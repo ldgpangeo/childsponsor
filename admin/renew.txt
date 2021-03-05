@@ -1,0 +1,24 @@
+Dear <name>,
+
+It's time to renew your sponsorship of <child>.
+
+Thank you for your sponsorship over the past year.  Your generosity has 
+helped your child receive food, clothing, and education at the Koi Koi 
+House Orphanage.
+
+Here are ways you can renew your sponsorship:
+
+Mail your check to:
+    The Giving Circle Africa
+    P.O. Box 3162
+    Saratoga Springs, NY  12866
+
+Or you can pay via credit card (PayPal) at:
+    http://www.thegivingcircle.org/childsponsor/renew.php?id=<itemid>
+    
+We look forward to your continued support of our children.
+
+Mark Bertrand
+Email:  info@thegivingcircle.org
+Phone:  518.469.6769
+

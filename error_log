@@ -1,0 +1,49 @@
+[18-Oct-2020 14:30:57 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function get_user_locale() in /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System/WordPress.php:549
+Stack trace:
+#0 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System.php(60): CRM_Utils_System_WordPress->getUFLocale()
+#1 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/Array.php(516): CRM_Utils_System::__callStatic('getUFLocale', Array)
+#2 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/PseudoConstant.php(1590): CRM_Utils_Array::asort(Array)
+#3 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/PseudoConstant.php(276): CRM_Core_PseudoConstant::renderOptionsFromTablePseudoconstant(Array, Array, 'country', 'get')
+#4 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/BAO/Address.php(1362): CRM_Core_PseudoConstant::get('CRM_Core_BAO_Ad...', 'count in /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System/WordPress.php on line 549
+[18-Oct-2020 15:54:08 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function get_user_locale() in /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System/WordPress.php:549
+Stack trace:
+#0 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System.php(60): CRM_Utils_System_WordPress->getUFLocale()
+#1 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/Array.php(516): CRM_Utils_System::__callStatic('getUFLocale', Array)
+#2 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/PseudoConstant.php(1590): CRM_Utils_Array::asort(Array)
+#3 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/PseudoConstant.php(276): CRM_Core_PseudoConstant::renderOptionsFromTablePseudoconstant(Array, Array, 'country', 'get')
+#4 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/BAO/Address.php(1362): CRM_Core_PseudoConstant::get('CRM_Core_BAO_Ad...', 'count in /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System/WordPress.php on line 549
+[18-Oct-2020 15:56:42 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function get_user_locale() in /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System/WordPress.php:549
+Stack trace:
+#0 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System.php(60): CRM_Utils_System_WordPress->getUFLocale()
+#1 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/Array.php(516): CRM_Utils_System::__callStatic('getUFLocale', Array)
+#2 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/PseudoConstant.php(1590): CRM_Utils_Array::asort(Array)
+#3 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/PseudoConstant.php(276): CRM_Core_PseudoConstant::renderOptionsFromTablePseudoconstant(Array, Array, 'country', 'get')
+#4 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/BAO/Address.php(1362): CRM_Core_PseudoConstant::get('CRM_Core_BAO_Ad...', 'count in /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System/WordPress.php on line 549
+[18-Oct-2020 16:20:10 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function get_user_locale() in /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System/WordPress.php:549
+Stack trace:
+#0 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System.php(60): CRM_Utils_System_WordPress->getUFLocale()
+#1 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/Array.php(516): CRM_Utils_System::__callStatic('getUFLocale', Array)
+#2 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/PseudoConstant.php(1590): CRM_Utils_Array::asort(Array)
+#3 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/PseudoConstant.php(276): CRM_Core_PseudoConstant::renderOptionsFromTablePseudoconstant(Array, Array, 'country', 'get')
+#4 /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Core/BAO/Address.php(1362): CRM_Core_PseudoConstant::get('CRM_Core_BAO_Ad...', 'count in /home/geoffrion15983/public_html/wordpress/wp-content/plugins/civicrm/civicrm/CRM/Utils/System/WordPress.php on line 549
+[14-Nov-2020 04:46:22 UTC] PHP Notice:  Undefined index: gid in /home/geoffrion15983/public_html/childsponsor/howto.php on line 2
+[14-Nov-2020 05:00:55 UTC] PHP Notice:  Undefined index: gid in /home/geoffrion15983/public_html/childsponsor/howto.php on line 2
+[22-Nov-2020 12:40:51 UTC] PHP Notice:  Undefined index: gid in /home/geoffrion15983/public_html/childsponsor/howto.php on line 2
+[14-Dec-2020 03:17:01 UTC] PHP Warning:  Use of undefined constant ERROR_MAJOR - assumed 'ERROR_MAJOR' (this will throw an Error in a future version of PHP) in /home/geoffrion15983/public_html/childsponsor/howto.php on line 5
+[14-Dec-2020 03:17:01 UTC] PHP Fatal error:  Uncaught Error: Wrong parameters for Exception([string $message [, long $code [, Throwable $previous = NULL]]]) in /home/geoffrion15983/public_html/childsponsor/howto.php:5
+Stack trace:
+#0 /home/geoffrion15983/public_html/childsponsor/howto.php(5): Exception->__construct('Invalid group I...', 'ERROR_MAJOR')
+#1 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/howto.php on line 5
+[02-Feb-2021 07:10:00 UTC] PHP Warning:  Use of undefined constant ERROR_MAJOR - assumed 'ERROR_MAJOR' (this will throw an Error in a future version of PHP) in /home/geoffrion15983/public_html/childsponsor/howto.php on line 5
+[02-Feb-2021 07:10:00 UTC] PHP Fatal error:  Uncaught Error: Wrong parameters for Exception([string $message [, long $code [, Throwable $previous = NULL]]]) in /home/geoffrion15983/public_html/childsponsor/howto.php:5
+Stack trace:
+#0 /home/geoffrion15983/public_html/childsponsor/howto.php(5): Exception->__construct('Invalid group I...', 'ERROR_MAJOR')
+#1 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/howto.php on line 5
+[09-Feb-2021 12:41:35 UTC] PHP Warning:  Use of undefined constant ERROR_MAJOR - assumed 'ERROR_MAJOR' (this will throw an Error in a future version of PHP) in /home/geoffrion15983/public_html/childsponsor/howto.php on line 5
+[09-Feb-2021 12:41:35 UTC] PHP Fatal error:  Uncaught Error: Wrong parameters for Exception([string $message [, long $code [, Throwable $previous = NULL]]]) in /home/geoffrion15983/public_html/childsponsor/howto.php:5
+Stack trace:
+#0 /home/geoffrion15983/public_html/childsponsor/howto.php(5): Exception->__construct('Invalid group I...', 'ERROR_MAJOR')
+#1 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/howto.php on line 5

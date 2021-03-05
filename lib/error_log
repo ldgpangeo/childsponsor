@@ -1,0 +1,25 @@
+[16-May-2020 00:00:02 America/New_York] PHP Fatal error:  Uncaught exception 'Exception' with message 'Internal error| SQL ERROR: select i.itemid, title, count(contact_id) as total from items i left join cvsponsors c on i.itemid = c.childid, sponsorships s where i.itemid = s.itemid and is_sponsored = 'Y' and effective_end_ts is null  and floor(i.childid) > 0 group by i.itemid order by count(contact_id)' in /home/geoffrion15983/public_html/childsponsor/lib/common-mysql.php:21
+Stack trace:
+#0 /home/geoffrion15983/public_html/childsponsor/lib/daily-report.php(189): do_sql('select i.itemid...')
+#1 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/lib/common-mysql.php on line 21
+[17-May-2020 00:00:03 America/New_York] PHP Fatal error:  Uncaught exception 'Exception' with message 'Internal error| SQL ERROR: select i.itemid, title, count(contact_id) as total from items i left join cvsponsors c on i.itemid = c.childid, sponsorships s where i.itemid = s.itemid and is_sponsored = 'Y' and effective_end_ts is null  and floor(i.childid) > 0 group by i.itemid order by count(contact_id)' in /home/geoffrion15983/public_html/childsponsor/lib/common-mysql.php:21
+Stack trace:
+#0 /home/geoffrion15983/public_html/childsponsor/lib/daily-report.php(189): do_sql('select i.itemid...')
+#1 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/lib/common-mysql.php on line 21
+[17-May-2020 06:56:04 America/New_York] PHP Fatal error:  Uncaught exception 'Exception' with message 'Internal error| SQL ERROR: select i.itemid, title, count(contact_id) as total from items i left join cvsponsors c on i.itemid = c.childid, sponsorships s where i.itemid = s.itemid and is_sponsored = 'Y' and effective_end_ts is null  and floor(i.childid) > 0 group by i.itemid order by count(contact_id)' in /home/geoffrion15983/public_html/childsponsor/lib/common-mysql.php:21
+Stack trace:
+#0 /home/geoffrion15983/public_html/childsponsor/lib/daily-report.php(189): do_sql('select i.itemid...')
+#1 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/lib/common-mysql.php on line 21
+[17-May-2020 07:04:07 America/New_York] PHP Fatal error:  Uncaught exception 'Exception' with message 'Internal error| SQL ERROR: select i.itemid, title, count(contact_id) as total from items i left join cvsponsors c on i.itemid = c.childid, sponsorships s where i.itemid = s.itemid and is_sponsored = 'Y' and effective_end_ts is null  and floor(i.childid) > 0 group by i.itemid order by count(contact_id)' in /home/geoffrion15983/public_html/childsponsor/lib/common-mysql.php:21
+Stack trace:
+#0 /home/geoffrion15983/public_html/childsponsor/lib/daily-report.php(189): do_sql('select i.itemid...')
+#1 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/lib/common-mysql.php on line 21
+[25-Aug-2020 00:00:01 America/New_York] PHP Fatal error:  Uncaught exception 'Exception' with message 'Internal error| SQL ERROR: select s.*,i.title, hash from sponsorship_pending s, items i where s.itemid = i.itemid and is_locked = 'N'' in /home/geoffrion15983/public_html/childsponsor/lib/common-mysql.php:21
+Stack trace:
+#0 /home/geoffrion15983/public_html/childsponsor/lib/daily-report.php(18): do_sql('select s.*,i.ti...')
+#1 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/lib/common-mysql.php on line 21

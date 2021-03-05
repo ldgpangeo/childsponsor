@@ -1,0 +1,385 @@
+body{
+background: #40311E;
+color:#85653d;
+}
+
+#main, #second_header{
+background: #dbe9f2;
+}
+
+/************************************************************************
+FEATURED
+*************************************************************************/
+
+#feature_background{
+background:#dbe9f2 url('../images/skin3/bg_featured.png') no-repeat center 301px;
+}
+
+.bottom_right_rounded_corner, .bottom_left_rounded_corner, .top_right_rounded_corner, .top_left_rounded_corner{
+background:transparent url('../images/skin3/rounded.png') no-repeat;
+}
+
+.bottom_right_rounded_corner{background-position: bottom right;}
+.bottom_left_rounded_corner{background-position: bottom left;}
+.top_right_rounded_corner{background-position: top right;}
+.top_left_rounded_corner{background-position: top left;}
+
+.slidercontent{
+color:#40311e;
+}
+
+/*accordiom*/
+.featured{
+background: #fff url(../images/skin3/preload.gif) no-repeat center center;
+}
+
+#top .fadeout{
+background: transparent url(../images/skin3/overlay.png) repeat-y right top;
+}
+
+/*fadeslider*/
+
+#top .slidecontrolls span{
+background:transparent url(../images/skin3/slide_controlls.png) no-repeat top right;
+}
+
+#top .slidecontrolls .active_item, #top .slidecontrolls span:hover{
+background:transparent url(../images/skin3/slide_controlls.png) no-repeat top left;
+}
+
+/*news*/
+.newsselect{
+border:1px solid #D9D2B0;
+background: #fff;
+}
+
+#top .newsselect .single_item{
+border-top: 1px solid #fff;
+border-bottom: 1px solid #D9D2B0;
+}
+
+.newsselect .single_item:hover, .newsselect .active_item{
+background-color: #fffbf2;
+text-shadow:1px 1px 0 #FFFFFF;
+outline: none;
+}
+
+.newsselect .sliderdate {
+color:#85653D;
+}
+
+/*------------------------------------------------------------*/
+
+
+#breadcrumb_wrap{
+background: #fff;
+border-top:1px solid #f2ebdc;
+}
+
+#head, #footer, #footer_bottom{
+color:#fff;
+}
+
+.logo{
+/*background: transparent url('../images/skin3/logo.png') repeat top left;*/
+background: transparent url('../images/header3.jpg') repeat top left;
+}
+
+.social_bookmarks .rss a{background: transparent url(../images/skin3/rss_16.png) 0 0  no-repeat;}
+.social_bookmarks .facebook a{background: transparent url(../images/skin3/facebook_16.png) 0 0  no-repeat;}
+.social_bookmarks .twitter a{background: transparent url(../images/skin3/twitter_16.png) 0 0  no-repeat;}
+.social_bookmarks .flickr a{background: transparent url(../images/skin3/flickr_16.png) 0 0  no-repeat;}
+.social_bookmarks .skype a{background: transparent url(../images/skin3/skype_16.png) 0 0  no-repeat;}
+
+/*head searchform*/
+
+#head #s{
+background: #fff;
+color:#40311e;
+}
+
+#head #searchsubmit{
+background: transparent url(../images/skin3/search.png) 2px center  no-repeat;
+}
+
+/*nav*/
+
+#nav a{
+color:#40311e;
+}
+
+#nav a:hover, #nav .current a, #top #nav li:hover a{
+color:#fff;
+background: #40311e;
+}
+
+#top #nav ul{
+background: #40311e;
+}
+
+#top #nav ul a{
+color: #fff;
+}
+
+#top #nav ul a:hover{
+color: #40311e;
+background: #fff;
+}
+
+
+/*featured*/
+
+.position_excerpt, .feature_excerpt
+{
+background: #fff;
+}
+
+.featured a{
+color: #444;
+}
+
+.featured a:hover{
+color: #85653d;
+}
+/*main content*/
+#info{
+border-bottom:1px solid #d9d2b0;
+color:#40311e;
+}
+
+.info_noslide{
+border-top:1px solid #d9d2b0;
+}
+
+.latest_work{
+background: transparent url(../images/skin3/icon_prev.png) left 2px  no-repeat;
+}
+.show_portfolio, .more-link{
+background: transparent url(../images/skin3/icon_next.png) right 2px  no-repeat;
+}
+
+.show_portfolio:hover{
+text-decoration: none;
+color: #85653d;
+}
+
+.portfolio_item .item_data{
+border:1px solid #d9d2b0;
+background: #fff;
+}
+
+.category a, .date,  .comments a{
+color:#40311e;
+}
+.portfolio_item{
+background: transparent url(../images/skin3/bg_portfolio_item.png) center bottom  no-repeat;
+}
+
+.category{
+background: transparent url(../images/skin3/icon_category.png) left 2px  no-repeat;
+}
+
+.date{
+background: transparent url(../images/skin3/icon_date.png) left 2px  no-repeat;
+}
+
+.post_data .comments{
+background: transparent url(../images/skin3/icon_comments.png) left 2px  no-repeat;
+}
+
+.portfolio_item .date{
+background: transparent url(../images/skin3/icon_date.png) right 2px  no-repeat;
+}
+/*blog*/
+
+.entry img{
+background: #fff;
+border:1px solid #d9d2b0;
+}
+
+.image_border{
+background: transparent url(../images/skin3/bg_blog_image.png) bottom center  no-repeat;
+}
+
+.latest_work, .show_portfolio, .more-link{
+color:#40311e;
+}
+
+/*pagination*/
+
+#top .pagination span, #top .pagination a{
+color:#fff;
+background: #40311e;
+}
+
+#top .pagination a:hover{
+color:#fff;
+background: #85653d;
+}
+
+#top .pagination .current{
+background: #81a63a;
+color:#fff;
+}
+
+/*footer*/
+#footer{
+background: transparent url(../images/skin3/bg_footer_shadow.png) top left  repeat-x;
+border-bottom:1px solid #333;
+}
+
+#top .breadcrumb_info{
+background: transparent url(../images/skin3/earth.png) top left no-repeat;
+}
+
+.breadcrumb span{
+background: transparent url(../images/skin3/arrow.png) center left no-repeat;
+color:#638327;
+}
+
+.breadcrumb a{
+color: #bfac88;
+text-shadow:1px 1px 0 #FFFFFF;
+}
+
+#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer legend, #footer h1 a, #footer h2 a, #footer h3 a, #footer h4 a, #footer h5 a, #footer h6 a {
+color:#fff;
+}
+#footer h2,#footer h3,#footer h4,#footer h6, #footer ul li a{
+border-bottom:1px solid #85653d;
+}
+
+#footer_bottom{
+border-top:1px solid #85653d;
+}
+
+#footer li a{
+color:#fff;
+}
+
+#footer li a:hover{
+color:#85653D;
+text-decoration: none;
+}
+
+.box li a,  #footer .box .recentcomments{
+background:transparent url(../images/skin3/bullet2.png) no-repeat scroll 0 12px;
+border-bottom:1px solid #85653d;
+}
+
+.copyright, .scrollTop{color:#fff;}
+.scrollTop:hover{color:#fff; font-weight: bold; text-decoration: none;}
+
+.scrollTop{
+background:transparent url(../images/skin3/top.png) no-repeat scroll right 7px;
+}
+
+/*sidebar*/
+
+#sidebar{
+background:transparent url(../images/skin3/bg_sidebar_center.png) repeat-y top left;
+}
+
+#sidebar_top{
+background:transparent url(../images/skin3/bg_sidebar_top.png) no-repeat top left;
+}
+
+#sidebar_bottom{
+background:transparent url(../images/skin3/bg_sidebar_bottom.png) no-repeat bottom left;
+}
+
+#sidebar .box li a{
+color:#85653d;
+border-bottom:1px solid #d9d2b0;
+background:transparent url(../images/skin3/bullet.png) no-repeat scroll 0 12px;
+}
+
+#sidebar li a:hover{
+color:#40311e;
+text-decoration: none;
+}
+
+/*Generic*/
+h1, h2, h3, h4, h5, h6, legend, .sliderheading, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+color:#40311e;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+color:#604a2e;
+text-decoration: none;
+}
+
+h2, h3, h4, h6{
+border-bottom:1px solid #d9d2b0;
+}
+
+
+
+a{
+color:#81a63a;
+}
+
+a:hover{
+color:#638327;
+}
+
+.lightbox_video, .lightbox_image{
+background:transparent url(../images/skin3/video.png) no-repeat center center;
+}
+
+#top .lightbox_image{
+background:transparent url(../images/skin3/magnify.png) no-repeat center center;
+}
+/************************************************************************
+CONTACT FORM
+*************************************************************************/
+
+.valid .text_input, .valid .text_area{border:1px solid #81a63a;} /*#70A41B*/
+.error .text_input, .error .text_area{border:1px solid #FF6600;}
+.ajax_alert .text_input, .ajax_alert .text_area{border:1px solid #ffb628;}
+
+/************************************************************************
+COMMENTS
+*************************************************************************/
+
+.comment_content{
+border:1px solid #d9d2b0;
+background: #fff;
+}
+
+.author_name a{
+color:#40311e;
+}
+
+.commentmetadata a{
+color:#aaa;
+}
+
+.says{
+background:transparent url(../images/skin3/say.png) no-repeat scroll 0 0;
+}
+
+.comment-reply-link{
+border-top:1px solid #d9d2b0;
+border-right:1px solid #d9d2b0;
+color:#40311e;
+}
+
+.text_input, textarea{
+border:1px solid #d9d2b0;
+color:#40311e;
+}
+
+.button{
+color: #fff;
+background:#81a63a;
+border: none;
+cursor: pointer;
+}
+
+.button:hover{
+color: #fff;
+background:#40311e;
+}
+
+

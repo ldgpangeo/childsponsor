@@ -1,0 +1,99 @@
+<?php
+#  set this to true to write debug messages to human-debug.log
+#  warning:   remember to set url value in dictionary.
+
+
+#$mode = "dev";   <-- mode now comes from common-init-dev or common-init-prod 
+$version="2.0 (7/12/13)"; 
+
+date_default_timezone_set('America/New_York');
+
+switch ($mode) {
+	case "dev" :
+		ini_set('display_errors', 1);
+		error_reporting(E_ERROR);
+		$dbg = true;                            #  write debug messages to the database
+#		$path = "/web/koikoi";    #  set to location of web files
+		$webroot = "/koikoi";         #  set to web path for the site
+		$url = "http://pangeo.homedns.org".$webroot;     
+		$email_url = "http://pangeo.homedns.org/koikoi/mail-assets";  
+		$dbhost = "localhost";                  #  location of mysql server
+		$dbuser = "root";                       #  database username
+		$dbpassword = "";                       #  database password
+		$dbname = "koikoi";                     #  name of database
+		$civicrm_base = "http://pangeo.homedns.org/tgc/civicrm";
+		$civicrm_url="$civicrm_base/contribute/transact?reset=1&id=1";
+		$cv = "civicrm_tgc";
+		$civicrm_form = urlencode($civicrm_url);
+		break;
+	case "test" :
+		#  these settings are for pangeo.homedns.org
+		ini_set('display_errors', 0);
+		$dbg = true;
+		die("Not configured for test");
+	#	$path = "/web/bricks-test";
+		$webroot = "/bricks-test";         #  set to web path for the site
+		$url = "http://pangeo.homedns.org".$webroot;     
+		$dbhost = "localhost";
+		$dbuser = "root";
+		$dbpassword = "";
+		$dbname = "bricks_test";
+		$captcha_public = "6LcDCcsSAAAAAEEJqcMe-on2uK02setRsph7xc0o ";
+		$captcha_private = "6LcDCcsSAAAAAE1Q5rTWpRaincmAz0pY2bfE5zqt ";
+		#  these are the Paypal sandbox fake store credentials.
+		$SandboxFlag = false;
+		$API_UserName="treas_api1.thegivingcircle.org";   
+		$API_Password="8KPKTNH46LGYB2Y9";
+		$API_Signature="AQbI-ppew6umS-qcIaEwL1H-.NQ5AYf19WCb8vJ0epV8Xxptm6OtaxYv";		
+		break;
+	case "prod" :
+		#  these settings are for hosted service  www.thegivingcircle.org
+		ini_set('display_errors', 0);
+		$dbg = true;
+	#	$path = "/usr/www/virtual/giving/www.thegivingcircle.org/childsponsor2";
+		$webroot = "/childsponsor2";
+		$url = "http://www.thegivingcircle.org".$webroot;
+		$email_url = "http://www.thegivingcircle.org/bricks/mail-assets";      
+		$dbhost = "localhost";
+		$dbuser = "sponsoruser";
+		$dbpassword = '8utrd4W';
+		$dbname = "15983_sponsor";
+		$civicrm_base = "https://www.thegivingcircle.org/drupal/civicrm";
+		$civicrm_url="$civicrm_base/contribute/transact?reset=1&id=1";
+		$cv="15983_civicrm";
+		$civicrm_form = urlencode($civicrm_url);
+#        $captcha_public = "6LfdRM4SAAAAAIwHdiwwnWUGHycUKEV-trhKDkUh ";
+#        $captcha_private = "6LfdRM4SAAAAAASOXsR3yr2HG0OFsmoJpkDUon8L ";
+		$SandboxFlag = false;
+#		$API_UserName="treas_api1.thegivingcircle.org";   
+#		$API_Password="8KPKTNH46LGYB2Y9";
+#		$API_Signature="AQbI-ppew6umS-qcIaEwL1H-.NQ5AYf19WCb8vJ0epV8Xxptm6OtaxYv";		
+		break;
+
+	default:
+		$dbg = false;
+		$path = "/web/";
+		$dbhost = "localhost";
+		$dbuser = "root"; 
+		$dbpassword = "";
+		$dbname = "bricks";
+}
+
+include_once("$path/lib/common-debug.php");
+include_once("$path/lib/common-error.php");
+include_once("$path/lib/common-mysql.php");
+include_once("$path/lib/common-forms.php");
+include_once("$path/lib/common-security.php");
+include_once("$path/lib/common.php");
+
+# database default values
+
+$hdl = dbopen();
+
+
+# Load specific messages into an array
+$contents = dictionary_as_array('content');
+#debug("content is \n".dump_array($contents));
+
+
+?>
