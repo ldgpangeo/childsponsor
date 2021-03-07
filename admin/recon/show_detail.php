@@ -20,6 +20,7 @@ try {
         $child_list .= "<option value=\"{$row['child']}    |{$row['itemid']}\"</option>\n";
     }
     
+    $header = "<script type='text/javascript' src='ajax.js'></script> ";
     include "page_header.php" ;
     
     ?>
