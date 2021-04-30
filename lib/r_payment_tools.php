@@ -11,7 +11,7 @@ function get_reconid ($itemid, $civicrmid, $create=false) {
     if (mysqli_num_rows($res) > 0) {
         $row = mysqli_fetch_assoc($res);
         $reconid = $row['reconid'];
-    } elseif ($create = true) {
+    } elseif ($create == true) {
         $sql = "insert r_recon(itemid,civicrmid,is_active) values ('$itemid', '$civicrmid', 'Y')";
         $sql .= " on duplicate key update itemid = '$itemid' ";
         $res = do_sql($sql);

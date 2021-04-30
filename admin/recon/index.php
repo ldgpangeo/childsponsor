@@ -20,7 +20,7 @@ try {
     }
 
 #  collect list of missing payments
-    $sql = "select * from recon_data where reconid not in (select distinct reconid from r_payments where type = 'sponsorship')";
+    $sql = "select * from recon_data where reconid not in (select distinct reconid from r_payments where type = 'sponsorship') and is_active = 'Y'";
     $res = do_sql($sql);
     $missing_payments = array();
     while ($row = mysqli_fetch_assoc($res)) {
@@ -30,7 +30,7 @@ try {
     $sql = "select d.*, p.type, p.datedone, p.source, p.amount, p.transactionid, r.period from recon_data d ";
     $sql .= " left join r_rules r on r.reconid = d.reconid and r.type = 'sponsorship', ";
     $sql .= " last_payments p ";
-    $sql .= "where d.reconid = p.reconid and p.type='sponsorship' and p.is_active = 'Y'";
+    $sql .= "where d.reconid = p.reconid and p.type='sponsorship' and p.is_active = 'Y' and d.is_active = 'Y'";
     $res = do_sql($sql);
     $late_payments = array ();
     $now = time();
@@ -53,6 +53,9 @@ try {
     $unimported = mysqli_result($res, 0, 'total');
     
 ?>
+
+<h2 align="center">Child Sponsorship Reconciliation</h2>
+<blockquote>
 <?php $count = count($alert_data);
 if ($count > 0) {$tmp = $count; } else {$tmp = "no";}
 ?>
@@ -72,11 +75,14 @@ for ($i = 1; $i <= $max; $i ++) {
 <h2>There are <?php print count($late_payments)?> overdue payments <a href="show_late_payments.php" class="myBlue myButtons">Visit</a></h2>
 
 <h2>There are <?php print $unimported ?> PayPal records that need repair. <a href="missing_payment_match.php" class="myBlue myButtons">Visit</a></h2>
-
+</blockquote>
 <p><a href="show_detail.php" class="myGreen myButtons">Find a sponsorship</a></p>
 
 <p><a href="import_paypal.php" class="myGReen myButtons">Import a Paypal Report (CSV)</a>  </p>
 
+<p><a href="report_sponsorships.php" class="myGReen myButtons" target="_blank" >Download quarterly sponsorships for wire (CSV)</a>  </p>
+
+<p><a href="../index.php?id=<?php print $sessionid ?>"  class="myGReen myButtons">Return to Child Sponsorship Admin</a>
 <?php
 } catch(Exception $err) {
     $trace = $err->getFile()." Line:".$err->getLine().", ".$err->getTraceAsString();

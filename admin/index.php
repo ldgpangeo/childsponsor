@@ -1,4 +1,6 @@
 <?php
+include "php_header.php";
+/*
 include "../lib/common-init.php";
 
   # test if user belongs here
@@ -13,27 +15,10 @@ include "../lib/common-init.php";
 		$login = $tmparray[1];
 	}
 
-
+*/
+include "page_header.php";
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<?php 
-if ($redirect <> '') {
-	print "<meta http-equiv=\"refresh\" content=\"1;URL=$redirect";
-	if ($referrer <> '') {
-		print "?referrer=".urlencode($referrer);
-	}
-	print "\">";
-}
-?>
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="style.css" rel="stylesheet" type="text/css">
-<title>KOIKOI Administration</title>
-</head>
-<body>
 <H2 align="center">Administrative Modules<br>Main Menu</H2>
 
 <Table width="80%" border="1" cellpadding="3" cellspacing="3" align="center">
@@ -100,7 +85,8 @@ if ($redirect <> '') {
 			<a href="view-error.php?id=<?php print $sessionid ?>">Error Log</a>
 		</li>
 	</ul>
-
+<hr noshade width="70%"></hr>
+<p><a href="recon/index.php">Go to Sponsorship Reconciliation</a></p>
 
 </td>
 </tr>

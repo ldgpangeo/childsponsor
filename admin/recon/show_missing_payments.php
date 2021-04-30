@@ -9,7 +9,7 @@ try {
     include "page_header.php";
     
     #  collect list of missing payments
-    $sql = "select * from recon_data where reconid not in (select distinct reconid from r_payments where type = 'sponsorship') order by sponsor,child";
+    $sql = "select * from recon_data where reconid not in (select distinct reconid from r_payments where type = 'sponsorship') and is_active = 'Y' order by sponsor,child";
     $res = do_sql($sql);
     $missing_payments = array();
     while ($row = mysqli_fetch_assoc($res)) {

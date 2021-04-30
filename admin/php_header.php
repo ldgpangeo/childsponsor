@@ -1,7 +1,7 @@
 <?php 
 #  This goes at the top of each php file 
 
-    include_once("../../lib/common-init.php");
+    include_once("../lib/common-init.php");
     
     # test if user belongs here
     if ( isset($_COOKIE['childsponsor']) ) {

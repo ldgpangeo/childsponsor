@@ -118,11 +118,11 @@ First created by <?php print $old['author']?> on <?php print us_date($old['dated
 <input type="hidden" name="datedone" value="<?php print $old['datedone'] ?>">
 <input type="hidden" name="scope" value="U">
 
-<a href="index.php">Main menu</a>
+<a href="index.php" class="myGreen">Main menu</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="submit" name="submit" value = "Save this item">
+<input type="submit" name="submit" value = "Save this item" class="myRed">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="show_recon.php?civicrmid=<?php print $recon['civicrmid']?>&itemid=<?php print $recon['itemid']?>">Recon Page</a>
+<a href="show_recon.php?civicrmid=<?php print $recon['civicrmid']?>&itemid=<?php print $recon['itemid']?>" class="myGreen">Recon Page</a>
 </td>
 </tr>
 </table>

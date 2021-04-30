@@ -5,12 +5,12 @@ select s.name sponsor, n.name child,  r.reconid, r.itemid, r.civicrmid from r_re
     where r.is_active = 'Y';
 
 
-create view recon_data as
-select r.* , i.title as child, c.sort_name as sponsor 
+create or replace view recon_data as
+select r.* , i.title as child, c.sort_name as sponsor, c.last_name as last_name,  c.email
 from r_recon r
 left join items i on r.itemid = i.itemid
 left join cvcontacts c on c.id = r.civicrmid
-where r.is_active = 'Y'
+
 
 
 

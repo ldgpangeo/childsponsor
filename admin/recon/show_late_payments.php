@@ -13,7 +13,7 @@ try {
     $sql = "select d.*, p.type, p.datedone, p.source, p.amount, p.transactionid, r.period from recon_data d ";
     $sql .= " left join r_rules r on r.reconid = d.reconid and r.type = 'sponsorship', ";
     $sql .= " last_payments p ";
-    $sql .= "where d.reconid = p.reconid and p.type='sponsorship' and p.is_active = 'Y' order by sponsor";
+    $sql .= "where d.reconid = p.reconid and p.type='sponsorship' and p.is_active = 'Y'  and d.is_active = 'Y' order by sponsor";
     $res = do_sql($sql);
     $late_payments = array();
     while ($row = mysqli_fetch_assoc($res)) {

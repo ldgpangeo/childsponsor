@@ -107,7 +107,7 @@ try {
     
     
     #does this child have other sponsors?
-    $sql = "select reconid, itemid, civicrmid, sponsor from recon_data where itemid = '$itemid' and civicrmid <> '$civicrmid' ";
+    $sql = "select reconid, itemid, civicrmid, sponsor from recon_data where itemid = '$itemid' and civicrmid <> '$civicrmid'  and is_active = 'Y'";
     $res = do_sql($sql);
     $other_sponsors = array();
     while ($row = mysqli_fetch_assoc($res)) {
@@ -214,7 +214,9 @@ if (strlen($tmp) <= 80)  {
 <th width="15%">ID</th>
 <th width="20%">Action</th>
 </tr>
-<?php  foreach ($payment_data as $row) {?>
+<?php  foreach ($payment_data as $row) {
+    if (! isset($defsource)) {$defsource = $row['source'];}
+    ?>
 <tr>
 <td align="center"><?php print $row['type']?></td>
 <td align="center"><?php print $row['source']?></td>
@@ -239,6 +241,10 @@ There are no payment rules defined for this sponsorship.
         if (time() > strtotime($next)) { $late = " LATE"; } else {$late = '';}
         if ($next <> false ) {print "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next payment: " . us_date($next). $late;}
         $first = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+        if ($key == 'sponsorship') {
+            $amount = $rules[$key]['amount'];
+            $defdate = $next;
+        }
     }
     
     ?>
@@ -258,16 +264,16 @@ There are no payment rules defined for this sponsorship.
 &nbsp;&nbsp; &nbsp;   
 Source: <select name="source">
 <option value="">Choose...</option>
-<option value="quickbooks">QuickBooks</option>
-<option value="paypal">PayPal</option>
-<option value="check">Check</option>
+<option value="quickbooks" <?php if ($defsource == 'quickbooks') { print " selected ";} ?>>QuickBooks</option>
+<option value="paypal" <?php if ($defsource == 'paypal') { print " selected ";} ?>>PayPal</option>
+<option value="check" <?php if ($defsource == 'check') { print " selected ";} ?>>Check</option>
 </select>
 &nbsp;&nbsp; &nbsp;   
-Date: <input type="date" name="datedone">
+Date: <input type="date" name="datedone" value="<?php print $defdate ?>">
 &nbsp;&nbsp; &nbsp;   
-Amount: <input type="text" name="amount" size="10">
+Amount: <input type="text" name="amount" size="10" value="<?php print $amount ?>">
 &nbsp;&nbsp; &nbsp; 
-Transactionid: <input type="text" name="transactionid" size="20">
+ID: <input type="text" name="transactionid" size="20">
 <input   
 <input type="submit" name="submit" value="Save payment">&nbsp;
 </span>

@@ -34,7 +34,7 @@ try {
 Sponsor name is:  <input id="sponsor" name="civicrmid" list="sponsors" size="60" type="text" autocomplete="off" onchange="doWork(this.value); return false;" >
 <datalist id="sponsors">
 <?php print $sponsor_list ?>
-</datalist>
+</datalist> (Click outside input box to show children)
 <br />
 <div id="ajax_text">
 
@@ -57,7 +57,7 @@ Sponsor name is:  <input id="sponsor" name="civicrmid" list="sponsors" size="60"
 Child name is:  <input id="child" name="itemid2" list="children" size="60" type="text" autocomplete="off" onblur="doChild(this.value); return false;" >
 <datalist id="children">
 <?php print $child_list ?>
-</datalist>
+</datalist> (Click outside input box to show sponsors)
 <br />
 <div id="ajax_child">
 

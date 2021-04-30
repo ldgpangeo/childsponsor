@@ -147,9 +147,9 @@ array_push($ids, $i);
 <input type ="hidden" name="civicrmid" value = "<?php print $info['civicrmid'] ?>">
 <input type ="hidden" name="itemid" value = "<?php print $info['itemid'] ?>">
 <input type ="hidden" name="idlist" value = "<?php print $tmp ?>">
-<a href="show_recon.php?civicrmid=<?php print $info['civicrmid']?>&itemid=<?php print $info['itemid']?>">Cancel</a>
+<a href="show_recon.php?civicrmid=<?php print $info['civicrmid']?>&itemid=<?php print $info['itemid']?>" class="MyGreen" >Cancel</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="submit" name="submit" value="Save rules">&nbsp;
+<input type="submit" name="submit" value="Save rules" class="MyRed" >&nbsp;
 
 </td>
 </tr>

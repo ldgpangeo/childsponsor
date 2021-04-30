@@ -6,3 +6,19 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in /home/geoffrion15983/public_html/childsponsor/admin/recon/rule_edit.php on line 13
+[09-Apr-2021 11:16:44 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function strttime() in /home/geoffrion15983/public_html/childsponsor/admin/recon/report_sponsorships.php:54
+Stack trace:
+#0 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/admin/recon/report_sponsorships.php on line 54
+[09-Apr-2021 11:17:07 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function strttime() in /home/geoffrion15983/public_html/childsponsor/admin/recon/report_sponsorships.php:54
+Stack trace:
+#0 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/admin/recon/report_sponsorships.php on line 54
+[09-Apr-2021 11:17:18 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function strttime() in /home/geoffrion15983/public_html/childsponsor/admin/recon/report_sponsorships.php:54
+Stack trace:
+#0 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/admin/recon/report_sponsorships.php on line 54
+[09-Apr-2021 11:17:34 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function fputcsf() in /home/geoffrion15983/public_html/childsponsor/admin/recon/report_sponsorships.php:62
+Stack trace:
+#0 {main}
+  thrown in /home/geoffrion15983/public_html/childsponsor/admin/recon/report_sponsorships.php on line 62

@@ -17,7 +17,7 @@ function require_login(&$sessionid) {
 	if ($sessionid == '') {
 		$sessionid = getinput('id');
 	}
-	debug ("require_login: sessionid is $sessionid");
+#	debug ("require_login: sessionid is $sessionid");
 	if ($sessionid == '') { return false;}    # user has no session
 	$row = get_session($sessionid);
 	#	debug ("require_login: Session array is \n".dump_array($row));
@@ -30,7 +30,7 @@ function require_login(&$sessionid) {
 debug ("userid is now $uid");
 	$sessionid = save_session($sessionid, $uid);                  # update time stamp
 	setcookie("childsponsor",$sessionid);
-	debug ("require_login: sessionid at end is  $sessionid");
+#	debug ("require_login: sessionid at end is  $sessionid");
 	$login = get_login($row['uid'],true);
 	if ($login === false) {return false;}     # user is not authorized
 	
