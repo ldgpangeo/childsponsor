@@ -30,6 +30,7 @@ try {
         $res = do_sql($sql);
     }
     #  -------------------------  end of post processing   ---------------------------------
+    $payflag = getinput("pay", "L");   # do I show all payments or just most recent
     debug ("Post variables are\n". dump_array($_POST));
     
     $civicrmid = html_entity_decode(getinput('civicrmid', null));
@@ -118,11 +119,21 @@ try {
     # collect payment history
     $show_payments = false;
     $payment_data = array();
-    $res = do_sql("select * from r_payments where reconid = '$reconid' and is_active = 'Y' order by datedone desc limit 5");
+    if ($payflag == "L") {
+        $fragment = " limit 5"; 
+        $link = "M";
+        $linklabel = "More";
+    } else {
+        $fragment = "";
+        $link = "L";
+        $linklabel = "Less";
+    }
+    $res = do_sql("select * from r_payments where reconid = '$reconid' and is_active = 'Y' order by datedone desc $fragment");
     while ( $row = mysqli_fetch_assoc($res) ){
         array_push($payment_data, $row);
     }
     if ( count($payment_data) > 0 ) { $show_payments = true; }
+    if ( count($payment_data) < 5 ) { $show_more = false; } else { $show_more = true; }
     
     # Collect the payment rules
     $rules = array();
@@ -198,7 +209,11 @@ if (strlen($tmp) <= 80)  {
 </td></tr>
 
 <?php } #  end alerts?>
-<tr><td><h3>Recent payments: (<?php print $reconid ?>)</h3><br />
+<tr><td><h3>Recent payments: (<?php print $reconid ?>)
+<?php if ($show_more) {?>
+&nbsp;&nbsp;&nbsp;<a href="<?php print $_SERVER['REQUEST_URI'] . "&pay=" . $link ?>"><?php print $linklabel?></a>
+<?php } ?>
+</h3><br />
 <table align="center" width="80%"  border="1" cellpadding="3" cellspacing="3">
 <?php if (! $show_payments) {?>
 <tr><td>
@@ -253,7 +268,7 @@ There are no payment rules defined for this sponsorship.
 &nbsp;&nbsp;
 (<a href="rule_edit.php?reconid=<?php print $reconid ?>">Edit</a>)</p>
 </td></tr>
-</table>
+</table> 
 <P>Add a payment:
 &nbsp;&nbsp; &nbsp;  <span style = "background-color: #ddd;"> Type: <select name="type">
 <option>sponsorship</option>
@@ -403,11 +418,14 @@ Maximum sponsors: <?php print $child_data['max_sponsors']?>
 </td>
 <tr>
 <td align="center" bgcolor="#ffffcc">
-<a href="index.php" class="MyGreen">Home</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="show_detail.php" class="MyGreen">Different sponsorship</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="show_recon.php?civicrmid=<?php print $civicrmid ?>&itemid=<?php print $itemid ?>"  class="MyGreen">Refresh this page</a>
+<table width="100%" border = "0">
+<tr>
+<td width="20%" align="left"><a href="show_late_payments.php" class="MyGreen">Late payments</a></td>
+<td width="20%" align="center"><a href="index.php" class="MyGreen">Home</a></td>
+<td width="20%" align="center"><a href="show_detail.php" class="MyGreen">Different sponsorship</a></td>
+<td width="20%" align="center"><a href="show_recon.php?civicrmid=<?php print $civicrmid ?>&itemid=<?php print $itemid ?>"  class="MyGreen">Refresh this page</a></td>
+<td width="20%" align="right"><a href="index.php" class="MyRed">Make inactive</a></td>
+</table>
 </td>
 </tr>
 
