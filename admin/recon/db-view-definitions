@@ -48,3 +48,10 @@ from r_recon r
 left join items i on r.itemid = i.itemid
 left join cvcontacts c on c.id = r.civicrmid
 where r.is_active = 'Y'
+
+create or replace view sponsorship_summary2 as
+select s.sort_name  sponsor, n.name child,  r.reconid, r.itemid, r.civicrmid from r_recon r  
+    left join cvcontacts s on r.civicrmid = s.id 
+    left join r_names n on r.itemid = n.itemid;
+
+

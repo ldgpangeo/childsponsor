@@ -3,6 +3,7 @@ try {
     
     include_once("php_header.php");
     include_once("../../lib/r_payment_tools.php");
+    include_once("../../lib/write_comment.php");
     
     $title = "Show Reconciliation";
     $header = "<script type='text/javascript' src='ajax.js'></script>";
@@ -17,7 +18,7 @@ try {
         debug ("cleaned form input is \n". dump_array($in) );
         $civicrmid = $in['civicrmid'];
         $itemid = $in['itemid'];
-        $reconid = get_reconid($itemid, $civicrmid, false);
+        $reconid = get_reconid($itemid, $civicrmid, false );
         if ($reconid == false) {
             $errors .= "Unable to find the reconciliation entry<br />";
         }
@@ -29,9 +30,32 @@ try {
         $sql .= "('$reconid', '{$in['type']}', '{$in['source']}', '{$in['datedone']}', '{$in['amount']}', 'Y', '{$in['transactionid']}' )";
         $res = do_sql($sql);
     }
+    if ( (isset($_POST['submit'])) and ($_POST[submit] == "Update comment") ) {
+        $errors = '';
+        $in = form_validate('comments', $errors);
+        $civicrmid = $in['civicrmid'];
+        $itemid = $in['itemid'];
+        $reconid = $in['reconid'];
+        if ($errors <> '') {
+            throw NEW exception ("Bad data.<br />$errors", ERROR_MINOR);
+        }
+        $in[author] = $login;
+        write_comment($in);
+    }
+    
     #  -------------------------  end of post processing   ---------------------------------
     $payflag = getinput("pay", "L");   # do I show all payments or just most recent
+    $all = getinput("all", "N");    #  do I show all notes
+    
     debug ("Post variables are\n". dump_array($_POST));
+    #  do I include terminated sponsorships?
+    $allrecon = getinput("allrecon","N");
+    if ($allrecon == 'Y') {
+        $getall = true;
+        debug ("getall is true.");
+    } else {
+        $getall = false;
+    }
     
     $civicrmid = html_entity_decode(getinput('civicrmid', null));
     if ($civicrmid == null) {
@@ -40,7 +64,11 @@ try {
     if ($civicrmid == null) {
         throw NEW exception("No sponsor name.", ERROR_MINOR);
     }
-    $civicrmid = array_pop( explode("|",$civicrmid ) );
+    if (strpos($civicrmid, "|") > 0) {
+        list ($junk, $civicrmid, $allrecon) =  explode("|",$civicrmid );
+    }
+    #$junk = array_pop( explode("|",$civicrmid ) );
+    #list($civicrmid,$allrecon) = explode ("-",$tmp);
     if (filter_var($civicrmid, FILTER_VALIDATE_INT) === false) {
         throw NEW exception ("Invalid sponsor | $sponsor", ERROR_MINOR);
     }
@@ -59,9 +87,18 @@ try {
     }
     
     # get the recon id
-    $reconid = get_reconid( $itemid, $civicrmid, false);
+    # debug ("Calling get_recon with params: $itemid, $civicrmid, false, $getall");
+    $reconid = get_reconid( $itemid, $civicrmid, false, $getall);
     if ($reconid == false) {
         throw NEW exception ("Can not find the recon information | reconid is $reconid, itemid is $itemid and civicrmid is $civicrmid", ERROR_MAJOR);
+    }
+    
+    # Collect the recon information -- particularly if this is still active
+    $sql = "select * from r_recon where reconid = '$reconid'";
+    $res = do_sql($sql);
+    $recon = mysqli_fetch_assoc($res);
+    if ($recon === false ){
+        throw NEW exception ("Failed to find recon information | reconid is $reconid");
     }
     
     # collect sponsor information
@@ -155,24 +192,34 @@ try {
     $show_alerts = false;
     $notes_data = array();
     $alerts_data = array ();
-    $sql = "select * from r_notes where reconid = '$reconid' and effective_end_ts is null and is_active = 'Y' order by effective_start_ts desc ";
+    $all_data = array();
+    $sql = "select * from r_notes where reconid = '$reconid' and effective_end_ts is null order by effective_start_ts desc ";
     $res = do_sql($sql);
     while ($row = mysqli_fetch_assoc($res)) {
+        array_push($all_data, $row);
         if ($row['is_alert'] == 'Y') {
             array_push($alerts_data, $row);
             $show_alerts = true;
         } else {
-            array_push($notes_data, $row);
-            $show_notes = true;
+            if ($row[is_active] == 'Y') {
+                array_push($notes_data, $row);
+                $show_notes = true;
+            }
         }
+    }
+    
+    # collect spreadsheet comments
+    $sql = "select comment from r_spreadsheet_comments where reconid = '$reconid' and effective_end_ts is null";
+    $res = do_sql($sql);
+    $comment = '';
+    while ($row = mysqli_fetch_assoc($res) ) {
+        $comment = $row['comment'];
     }
     
     ?>
 <body>
-<H2 align="center"><?php print $sponsor_data['sort_name']?> sponsoring <?php print $child_data['title']?></H2>
-<form action="" method = "post">
-<input type="hidden" name="civicrmid" value="<?php print $civicrmid ?>">
-<input type="hidden" name="itemid" value="<?php print $itemid ?>">
+<H2 align="center"><?php print $sponsor_data['sort_name']?> sponsoring <?php print $child_data['title']?>
+<?php if ($recon['is_active'] == 'N') { print "<br />Sponsorship terminated: ".stripslashes($recon['status']); } ?></H2>
 <Table width="80%" border="1" cellpadding="3" cellspacing="3" align="center">
 <?php if ($show_alerts){ ?>
 <tr><td>
@@ -269,7 +316,11 @@ There are no payment rules defined for this sponsorship.
 (<a href="rule_edit.php?reconid=<?php print $reconid ?>">Edit</a>)</p>
 </td></tr>
 </table> 
-<P>Add a payment:
+<P>
+<form action="" method = "post">
+<input type="hidden" name="civicrmid" value="<?php print $civicrmid ?>">
+<input type="hidden" name="itemid" value="<?php print $itemid ?>">
+Add a payment:
 &nbsp;&nbsp; &nbsp;  <span style = "background-color: #ddd;"> Type: <select name="type">
 <option>sponsorship</option>
 <option>nest egg</option>
@@ -289,17 +340,38 @@ Date: <input type="date" name="datedone" value="<?php print $defdate ?>">
 Amount: <input type="text" name="amount" size="10" value="<?php print $amount ?>">
 &nbsp;&nbsp; &nbsp; 
 ID: <input type="text" name="transactionid" size="20">
-<input   
+<input type="hidden" name="allrecon" value="<?php print $allrecon ?>">
+   
 <input type="submit" name="submit" value="Save payment">&nbsp;
 </span>
+</form>
+<br />
+<!--                        Spreadsheet comment section                -->
 
-</P>
+<form action="" method = "post">
+<input type="hidden" name="civicrmid" value="<?php print $civicrmid ?>">
+<input type="hidden" name="itemid" value="<?php print $itemid ?>">
+<input type="hidden" name="reconid" value="<?php print $reconid ?>">
+<input type="hidden" name="allrecon" value="<?php print $allrecon ?>">
+
+Spreadsheet comment:
+<input type="text" name='comment'  value="<?php print $comment?>" size = "40">
+<input type="submit" name="submit" value="Update comment">&nbsp;
+</form>
+</p>
 </td>
 </tr>
 <tr><td>
 <h3>Notes</h3>
 <table cellspacing = "3" cellpadding = "3" border = "1" width = "80%" align = "center" >
-<?php foreach ($notes_data as $note) {?>
+<?php 
+if ($all == 'N') {
+    $tmparray = $notes_data;
+} else {
+    $tmparray = $all_data;
+}
+    foreach ($tmparray as $note) {
+?>
 <tr>
 <td valign="top">
 <?php print us_date($note['effective_start_ts'], false)?> <br />
@@ -311,15 +383,23 @@ if (strlen($note['note']) > 80) {
     if (getinput("more") == $note['noteid']) {
         #  show everything
         $tmp = $note['note'];
-        $link = " <a href=\"show_recon.php?civicrmid=$civicrmid&itemid=$itemid\">Show less</a><br />";
+        $link = "Show  <a href=\"show_recon.php?civicrmid=$civicrmid&itemid=$itemid&all=$all\">less</a>";
     } else {
         $tmp = substr($note['note'], 0, 80) . " ...";
-        $link = " <a href=\"show_recon.php?civicrmid=$civicrmid&itemid=$itemid&more={$note['noteid']}\">Show more </a><br />";
-    } 
+        $link = "Show  <a href=\"show_recon.php?civicrmid=$civicrmid&itemid=$itemid&more={$note['noteid']}&all=$all\">more </a>";
+    }
+    
 } else {
     $tmp = $note['note'];
-    $link = "";
+    $link = "Show ";
 }
+if ($all == "N") {
+    $link .= "&nbsp;&nbsp;&nbsp; <a href=\"show_recon.php?civicrmid=$civicrmid&itemid=$itemid&all=Y\"> All</a> ";
+} else {
+    $link .= "&nbsp;&nbsp;&nbsp; <a href=\"show_recon.php?civicrmid=$civicrmid&itemid=$itemid\"> Active</a> ";
+}
+$link .= "<br />";
+
 ?>
 <pre><?php print $tmp ?></pre>
 </td>
@@ -423,8 +503,14 @@ Maximum sponsors: <?php print $child_data['max_sponsors']?>
 <td width="20%" align="left"><a href="show_late_payments.php" class="MyGreen">Late payments</a></td>
 <td width="20%" align="center"><a href="index.php" class="MyGreen">Home</a></td>
 <td width="20%" align="center"><a href="show_detail.php" class="MyGreen">Different sponsorship</a></td>
-<td width="20%" align="center"><a href="show_recon.php?civicrmid=<?php print $civicrmid ?>&itemid=<?php print $itemid ?>"  class="MyGreen">Refresh this page</a></td>
-<td width="20%" align="right"><a href="index.php" class="MyRed">Make inactive</a></td>
+<td width="20%" align="center"><a href="show_recon.php?civicrmid=<?php print $civicrmid ?>&itemid=<?php print $itemid ?>&allrecon=<?php print $allrecon ?>"  class="MyGreen">Refresh this page</a></td>
+<td width="20%" align="right">
+<?php if ($recon['is_active'] == "Y") {?>
+<a href="cancel_sponsorship.php?reconid=<?php print $reconid ?>" class="MyRed">Terminate this one</a>
+<?php } else { ?>
+<a href="resume_sponsorship.php?reconid=<?php print $reconid ?>" class="MyRed">Resume this one</a>
+<?php } ?>
+</td>
 </table>
 </td>
 </tr>

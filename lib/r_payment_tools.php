@@ -1,12 +1,17 @@
 <?php 
 
-function get_reconid ($itemid, $civicrmid, $create=false) {
+function get_reconid ($itemid, $civicrmid, $create=false, $all = false) {
     global $hdl, $dbg;
     if (($itemid == '') or ($civicrmid == '') or ($itemid == null) or ($civicrmid == null)) { return false; }
     
     $reconid = 0;
+    if ($all) {
+        $fragment = '';
+    } else {
+        $fragment = " and is_active = 'Y' ";
+    }
     #  test if recon already exists
-    $sql = "select reconid from r_recon where itemid = '$itemid' and civicrmid = '$civicrmid' and is_active = 'Y' ";
+    $sql = "select reconid from r_recon where itemid = '$itemid' and civicrmid = '$civicrmid' $fragment ";
     $res = do_sql($sql);
     if (mysqli_num_rows($res) > 0) {
         $row = mysqli_fetch_assoc($res);

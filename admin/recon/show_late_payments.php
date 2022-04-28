@@ -11,12 +11,20 @@ try {
     $today = time();
     #  collect list of missing payments
     $sql = "select d.*, p.type, p.datedone, p.source, p.amount, p.transactionid, r.period from recon_data d ";
-    $sql .= " left join r_rules r on r.reconid = d.reconid and r.type = 'sponsorship', ";
-    $sql .= " last_payments p ";
-    $sql .= "where d.reconid = p.reconid and p.type='sponsorship' and p.is_active = 'Y'  and d.is_active = 'Y' order by sponsor";
+    $sql .= " left join r_rules r on r.reconid = d.reconid and r.type = 'sponsorship'  ";
+    $sql .= " , last_payments p ";
+#    $sql .= " left join r_search s on d.civicrmid = s.civicrmid and s.source = p.source  ";
+    $sql .= "where d.reconid = p.reconid and p.type='sponsorship' and p.is_active = 'Y'  and d.is_active = 'Y' order by p.source, sponsor";
     $res = do_sql($sql);
     $late_payments = array();
     while ($row = mysqli_fetch_assoc($res)) {
+        #  collect search name
+        $sql2 = "select name as search_name from r_search s, last_payments p ";
+        $sql2 .= " where s.civicrmid = '{$row['civicrmid']}' and s.source = p.source  and  p.reconid = '{$row['reconid']}' and  p.is_active = 'Y' ";
+        $res2 = do_sql($sql2);
+        if ( ($res2 <> false) and (mysqli_num_rows($res2) == 1) ){
+            $row['sponsor'] = mysqli_result($res2,0,'search_name');
+        }
         if (($row['datedone'] <> '') and ($row['period'] <> '') ) {
             #  compute when next payment is due
             $next_payment = next_payment_date($row['datedone'], $row['period']);
@@ -47,7 +55,7 @@ try {
 </tr>
 <?php foreach ($late_payments as $row) {?>
 <tr>
-<td align="center"><?php print $row['sponsor']?></td>
+<td align="center"><?php if ($row['search_name'] <> '') { print $row['search_name'];} else { print $row['sponsor']; }?></td>
 <td align="center"><?php print $row['child']?></td>
 <td align="center"><?php print $row['source']?></td>
 <td align="center"><?php print $row['period']?></td>

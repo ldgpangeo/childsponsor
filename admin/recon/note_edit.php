@@ -93,7 +93,7 @@ Retire this item
 <td>
 <input type="radio" name='is_active' value="Y" <?php if ($old['is_active'] == 'Y') {print "checked";}?>> No
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="radio" name='is_active' value="N" <?php if ($old['is_active'] == 'N') {print "checked";}?>> Yes, delete it
+<input type="radio" name='is_active' value="N" <?php if ($old['is_active'] == 'N') {print "checked";}?>> Yes, hide it
 </td>
 </tr>
 
@@ -120,7 +120,7 @@ First created by <?php print $old['author']?> on <?php print us_date($old['dated
 
 <a href="index.php" class="myGreen">Main menu</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="submit" name="submit" value = "Save this item" class="myRed">
+<input type="submit" name="submit" value = "Save this item" class="myBlue">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="show_recon.php?civicrmid=<?php print $recon['civicrmid']?>&itemid=<?php print $recon['itemid']?>" class="myGreen">Recon Page</a>
 </td>

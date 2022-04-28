@@ -2,13 +2,18 @@
 try {
     
     include_once("../../lib/common-init.php");
-    
+    $all = getinput("all", "N");
+    if ($all == 'Y') {
+        $fragment = '';
+    } else {
+        $fragment = "and r.is_active = 'Y' ";
+    }
     #  create a list of all sponsors
     $sponsor_list = '';
-    $sql = "select distinct(r.civicrmid) id, c.sort_name, c.email from r_recon r, cvcontacts c where c.id = r.civicrmid and r.is_active = 'Y' order by c.sort_name";
+    $sql = "select distinct(r.civicrmid) id, c.sort_name, c.email from r_recon r, cvcontacts c where c.id = r.civicrmid $fragment order by c.sort_name";
     $res = do_sql($sql);
     while ($row = mysqli_fetch_assoc($res) ) {
-        $sponsor_list .= "<option value=\"{$row['sort_name']}, {$row['email']}    |{$row['id']}\"</option>\n";
+        $sponsor_list .= "<option value=\"{$row['sort_name']}, {$row['email']}    |{$row['id']}|{$all}\"</option>\n";
     }
     
     
@@ -31,7 +36,7 @@ try {
 <Table width="80%" border="1" cellpadding="3" cellspacing="3" align="center">
 <tr><th bgcolor="#ffffcc">Search by Sponsor</th></tr>
 <tr><td>
-Sponsor name is:  <input id="sponsor" name="civicrmid" list="sponsors" size="60" type="text" autocomplete="off" onchange="doWork(this.value); return false;" >
+Sponsor name is:  <input id="sponsor" name="civicrmid" list="sponsors" size="60" type="text" autocomplete="off" onchange="doWork(this.value,'<?php print $all ?>'); return false;" >
 <datalist id="sponsors">
 <?php print $sponsor_list ?>
 </datalist> (Click outside input box to show children)
@@ -44,7 +49,8 @@ Sponsor name is:  <input id="sponsor" name="civicrmid" list="sponsors" size="60"
 <tr><td align="center" bgcolor="#ffffcc">
 <a href="index.php" class="myGreen">Home</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="submit" name="submit" value="Show details" class="myRed">
+<input type="hidden" name="allrecon" value = "<?php print $all ?>">
+<input type="submit" name="submit" value="Show details" class="myBlue">
 </Table>
  </form>
 
@@ -67,7 +73,7 @@ Child name is:  <input id="child" name="itemid2" list="children" size="60" type=
 <tr><td align="center" bgcolor="#ffffcc">
 <a href="index.php" class = "myGreen" >Home</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="submit" name="submit" value="Show details" class="MyRed">
+<input type="submit" name="submit" value="Show details" class="MyBlue">
 </Table>
 </form>
 

@@ -48,7 +48,18 @@ if (! (filter_var($childid, FILTER_VALIDATE_INT) === false) ) {
 	# clean out pending tables
 	do_sql("delete from sponsorship_pending where itemid = '$childid' and hash = $hash ");
 	do_sql("commit");
-	
+	if (($data['contactid'] <> null) and ($childid <> null) ) {
+	   # Add a new reconciliation entry
+	   # First check if it already exists
+	   $res = do_sql("select * from r_recon where itemid = '$childid' and civicrmid = '{$data['contactid']}' ");
+	   if (mysqli_num_rows($res) > 0) {
+	       #  already exists, make it active
+	       do_sql("update r_recon set is_active ='Y', status = null where itemid = '$childid' and civicrmid = '{$data['contactid']}' ");
+	   } else {
+	       #  create a new one
+	       do_sql("insert r_recon (itemid, civicrmid) values ('$childid', '{$data['contactid']}' )");
+	   }
+	}
 	# log the purchase 
 	logit ("Sponsorship_complete","itemid = $childid, name = {$data['first_name']} {$data['last_name']}", false);
 }

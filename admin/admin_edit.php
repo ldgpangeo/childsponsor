@@ -30,7 +30,8 @@ try {
 			$old = array();
 		}
 		
-
+		$recon = getinput("r", 0);
+		
 # ------------------------  start form processing  --------------------------
 if ($_POST['submit'] <> '') {
 		$errors = '';
@@ -85,13 +86,19 @@ if ($_POST['submit'] <> '') {
 	} else {
 		logit("ADMIN_UPDATE","login = {$in['login']}, name = {$in['name']}, by admin = $login"); 
 	}	
-	#  return to list of admins
-	$redirect = "admin_list.php?id=$sessionid";
-	
+	if ($recon == 1) {
+	    #  return to recon index page
+	    $redirect = "recon/index.php?id=$sessionid";
+	    
+	} else {
+	    #  return to list of admins
+	    $redirect = "admin_list.php?id=$sessionid";
+	}
 }
 #  -------------------------  end form processing  --------------------------
 
 }
+
 
  ?>
 
@@ -165,6 +172,7 @@ if ($redirect <> '') {
 	</tr>
 	<?php } #  end enable/disable admin ?>
 	<tr bgcolor="#FFFFBB">
+		<input type="hidden" name="r" value="<?php print $recon ?>">		
 		<td align="center" colspan="2"><input type="submit" name="submit" value="<?php print $submit ?>">
 		<input type="hidden" name="uid" value="<?php print $old['uid'] ?>">	
 		</td>
@@ -173,7 +181,11 @@ if ($redirect <> '') {
 </form>
 
 </p>
+<?php if ($recon == 1) {?>
+  <p><a href="recon/index.php?id=<?php print $sessionid ?>&object=<?php print $object_id?>">Return to Reconciliation Menu</a></p>
+<?php } else { ?>
   <p><a href="index.php?id=<?php print $sessionid ?>&object=<?php print $object_id?>">Return to Admin Menu</a></p>
+<?php } ?>
 
 </body>
 </html>

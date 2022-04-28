@@ -4,6 +4,12 @@ select s.name sponsor, n.name child,  r.reconid, r.itemid, r.civicrmid from r_re
     left join r_names n on r.itemid = n.itemid
     where r.is_active = 'Y';
 
+create or replace view all_sponsorship_summary as
+select s.name sponsor, n.name child,  r.reconid, r.itemid, r.civicrmid from r_recon r  
+    left join r_search s on r.civicrmid = s.civicrmid and s.source = 'paypal'
+    left join r_names n on r.itemid = n.itemid;
+    
+
 
 create or replace view recon_data as
 select r.* , i.title as child, c.sort_name as sponsor, c.last_name as last_name,  c.email

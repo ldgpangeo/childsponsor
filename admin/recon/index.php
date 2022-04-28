@@ -59,17 +59,12 @@ try {
 <?php $count = count($alert_data);
 if ($count > 0) {$tmp = $count; } else {$tmp = "no";}
 ?>
-<h2>There are <?php print $tmp?> active alerts</h2>
-<blockquote>
-<?php 
-if ($count > 5) { $max = 5; } else {$max = $count;}
-for ($i = 1; $i <= $max; $i ++) {
-    $row = array_shift($alert_data);
-    print "<h3>Sponsor: {$row['sponsor']} Child: {$row['child']} " . substr($row['note'],0,40);
-    print " &nbsp;&nbsp;<a href=\"show_recon.php?civicrmid={$row['civicrmid']}&itemid={$row['itemid']}\" class=\"myBlue myButtons\">Visit</a></h3>";
-}
-?>
-</blockquote>
+<h2>There are <?php print $tmp?> active alerts
+<?php if ($count > 0) {?>
+<a href="show_alerts.php" class="myBlue myButtons">Visit</a></h2>
+<?php }?>
+</h2>
+
 <h2>There are <?php print count($missing_payments)?> Sponsorships with no payments <a href="show_missing_payments.php" class="myBlue myButtons">Visit</a></h2>
 
 <h2>There are <?php print count($late_payments)?> overdue payments <a href="show_late_payments.php" class="myBlue myButtons">Visit</a></h2>
@@ -83,6 +78,11 @@ for ($i = 1; $i <= $max; $i ++) {
 <p><a href="report_sponsorships.php" class="myGReen myButtons" target="_blank" >Download quarterly sponsorships for wire (CSV)</a>  </p>
 
 <p><a href="../index.php?id=<?php print $sessionid ?>"  class="myGReen myButtons">Return to Child Sponsorship Admin</a>
+
+<p><a href="show_detail.php?all=Y" class="myGreen myButtons">Search all sponsorships</a></p>
+
+<p><a href="../admin_edit.php?uid=<?php print $uid ?>&r=1&id=<?php print $sessionid?>" class="myGreen myButtons">Edit my profile</a></p>
+
 <?php
 } catch(Exception $err) {
     $trace = $err->getFile()." Line:".$err->getLine().", ".$err->getTraceAsString();

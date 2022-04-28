@@ -1,15 +1,24 @@
 <?php 
 try {
 include ("../../lib/common-init.php");
+debug ("ajax input\n".dump_array($_GET));
+
 $tmp = urldecode($_GET['choice']);
-$civicrmid = array_pop( explode("|",$tmp ) );
-debug ("found $civicrmid from {$_GET['choice']}");
+
+list ($junk, $civicrmid, $all) =  explode("|",$tmp );
+debug ("found $civicrmid from {$_GET['choice']} and all is $all ");
 if (filter_var($civicrmid, FILTER_VALIDATE_INT) === false) {
     throw NEW exception ("Invalid sponsor | $sponsor", ERROR_MAJOR);
 }
+if ($all == "Y") { 
+    $view = "all_sponsorship_summary";
+} else {
+    $view = "sponsorship_summary";
+}
+
 
 $out = '';
-$sql = "select itemid, child, datedone, amount from sponsorship_summary s left join last_payments p on s.reconid = p.reconid  where s.civicrmid = '$civicrmid'";
+$sql = "select itemid, child, datedone, amount from $view s left join last_payments p on s.reconid = p.reconid  where s.civicrmid = '$civicrmid'";
 $res = do_sql($sql);
 if (mysqli_num_rows($res) == 1) {$selected = "checked"; } else { $selected = ''; }
 while ($row = mysqli_fetch_assoc($res)) {
